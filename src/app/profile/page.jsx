@@ -1,10 +1,10 @@
 import "./profile.scss";
-import '../global.css'
-import Navbar from '../components/navbar/Navbar'
+import Link from "next/link";
+import "../global.css";
+import Navbar from "../components/navbar/Navbar";
 const Profile = () => {
   return (
     <>
-      
       <Navbar></Navbar>
     </>
   );
