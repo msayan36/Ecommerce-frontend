@@ -1,0 +1,6 @@
+.prod_hover{
+    display: none;
+}
+.product:hover + .prod_hover{
+    display: block;
+}
