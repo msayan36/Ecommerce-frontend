@@ -26,7 +26,9 @@ const Profile = () => {
 
   const apiCall = async () => {
     setLoading(true);
-    const res = await instance.get(`${process.env.SERVER_URL}/users/me`);
+    const res = await instance.get(
+      `${process.env.NEXT_PUBLIC_SERVER_URL}/users/me`
+    );
 
     // console.log(res.data);
     // console.log(res.data.username);

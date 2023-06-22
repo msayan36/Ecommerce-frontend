@@ -22,10 +22,13 @@ const Login = () => {
 
     try {
       setLoading(true);
-      const res = await instance.post(`${process.env.SERVER_URL}/users/login`, {
-        loginId,
-        password,
-      });
+      const res = await instance.post(
+        `${process.env.NEXT_PUBLIC_SERVER_URL}/users/login`,
+        {
+          loginId,
+          password,
+        }
+      );
       localStorage.setItem("userInfo", JSON.stringify(res.data));
       setLoginId("");
       setPassword("");

@@ -30,7 +30,7 @@ const Register = () => {
       }
       setLoading(true);
       const res = await instance.post(
-        `${process.env.SERVER_URL}/users/register`,
+        `${process.env.NEXT_PUBLIC_SERVER_URL}/users/register`,
         {
           name,
           email,
