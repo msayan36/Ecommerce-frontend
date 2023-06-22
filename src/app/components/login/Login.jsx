@@ -22,13 +22,10 @@ const Login = () => {
 
     try {
       setLoading(true);
-      const res = await instance.post(
-        "https://ecommerce-backend-neo8.onrender.com/api/v1/users/login",
-        {
-          loginId,
-          password,
-        }
-      );
+      const res = await instance.post(`${process.env.SERVER_URL}/users/login`, {
+        loginId,
+        password,
+      });
       localStorage.setItem("userInfo", JSON.stringify(res.data));
       setLoginId("");
       setPassword("");

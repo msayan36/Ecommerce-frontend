@@ -30,7 +30,7 @@ const Register = () => {
       }
       setLoading(true);
       const res = await instance.post(
-        "https://ecommerce-backend-neo8.onrender.com/api/v1/users/register",
+        `${process.env.SERVER_URL}/users/register`,
         {
           name,
           email,
