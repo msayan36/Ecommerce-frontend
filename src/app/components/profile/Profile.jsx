@@ -1,26 +1,60 @@
+"use client";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
+import "../../global.css";
+import WhiteBtn from "../WhiteBtn";
 import Image from "next/image";
-import Link from "next/link";
-import "./profile.scss";
-import "../global.css";
-import "./page.css";
-import WhiteBtn from "../components/WhiteBtn";
-import Navbar from "../components/navbar/Navbar";
-import ProfileDetails from "../components/ProfileDetails";
+import Navbar from "../navbar/Navbar";
 import { IoIosSettings } from "react-icons/io";
-import { AiFillStar } from "react-icons/ai";
+import ProfileDetails from "../ProfileDetails";
 import ProfileImg from "./images/profile.png";
 import ProdImg from "./images/prod_img.png";
+import "./page.css";
+import { AiFillStar } from "react-icons/ai";
 
 const Profile = () => {
+  const [loading, setLoading] = useState(false);
+  const [userInfo, setUserInfo] = useState({});
+
   let img = [1, 2, 3, 4, 5];
+
+  // axios.defaults.withCredentials = true;
+  const instance = axios.create({
+    withCredentials: true,
+  });
+
+  const apiCall = async () => {
+    setLoading(true);
+    const res = await instance.get(
+      `${process.env.NEXT_PUBLIC_SERVER_URL}/users/me`
+    );
+
+    // console.log(res.data);
+    // console.log(res.data.username);
+    // console.log(res.data.name);
+    setUserInfo(res.data);
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    apiCall();
+  }, []);
+
+  const products_count = userInfo.products_count
+    ? userInfo.products_count.length
+    : 0;
+  const followers_count = userInfo.followers ? userInfo.followers.length : 0;
+  const following_count = userInfo.following ? userInfo.following.length : 0;
+
+  if (loading) return <p>Loading</p>;
 
   return (
     <>
       <div></div>
       <div className="flex flex-row bg-black h-full">
         <div className="basis-1/5">
-          <Navbar></Navbar>
+          <Navbar />
         </div>
         <div className="basis-4/5 pt-16 border-l-2 border-white ">
           <div className="flex flex-row">
@@ -36,32 +70,36 @@ const Profile = () => {
             <div className="basis-2/3 text-white">
               <div className=" flex flex-row">
                 <div className="text-xl font-semibold inline pr-5 py-1">
-                  username
+                  {userInfo.username ? userInfo.username : "Username"}
+                  {/* Username */}
                 </div>
-                <Link href="" className="pr-5">
+                <div className="pr-5">
                   <WhiteBtn data="Edit Profile"></WhiteBtn>
-                </Link>
-                <Link href="" className="my-1">
+                </div>
+                <div className="py-1">
                   <IoIosSettings size={35}></IoIosSettings>
-                </Link>
+                </div>
               </div>
               <div className=" flex flex-row text-base pt-7">
                 <ProfileDetails
-                  details={{ figure: "4000+", variable: "products" }}
+                  details={{ figure: products_count, variable: "products" }}
                 ></ProfileDetails>
                 <ProfileDetails
-                  details={{ figure: "5023", variable: "followers" }}
+                  details={{ figure: followers_count, variable: "followers" }}
                 ></ProfileDetails>
                 <ProfileDetails
-                  details={{ figure: "2000", variable: "following" }}
+                  details={{ figure: following_count, variable: "following" }}
                 ></ProfileDetails>
               </div>
               <div className=" text-base pt-7 pb-10 w-3/4">
-                <div>Lorem ipsum dolor sit</div>
+                <div>
+                  {userInfo.name ? userInfo.name : "Name"}
+                  {/* Name */}
+                </div>
                 <div className="font-extralight">
-                  amet consectetur adipisicing elit. Libero maiores, ducimus
-                  labore neque quam debitis exercitationem repellat iste fugiat
-                  voluptatem aut distincti
+                  {userInfo.profileDesc
+                    ? userInfo.profileDesc
+                    : "No Profile Description"}
                 </div>
               </div>
             </div>
@@ -119,8 +157,6 @@ const Profile = () => {
       </div>
     </>
   );
-import Profile from "../components/profile/Profile";
-const page = () => {
-  return <Profile />;
 };
-export default page;
+
+export default Profile;
