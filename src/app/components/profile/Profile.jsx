@@ -1,15 +1,14 @@
 "use client";
 import { useState, useEffect } from "react";
 import axios from "axios";
-
+import ProfileImg from "./images/profile.png";
+import ProdImg from "./images/prod_img.png";
 import "../../global.css";
 import WhiteBtn from "../WhiteBtn";
 import Image from "next/image";
 import Navbar from "../navbar/Navbar";
 import { IoIosSettings } from "react-icons/io";
 import ProfileDetails from "../ProfileDetails";
-import ProfileImg from "./images/profile.png";
-import ProdImg from "./images/prod_img.png";
 import "./page.css";
 import { AiFillStar } from "react-icons/ai";
 

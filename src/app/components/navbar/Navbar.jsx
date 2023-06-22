@@ -8,7 +8,7 @@ import { IoIosCreate } from "react-icons/io";
 import Link from "next/link";
 import Image from "next/image";
 import "./navbar.css";
-import ProfileImg from "../../profile/images/profile.png";
+import ProfileImg from "../profile/images/profile.png";
 const Navbar = () => {
   let list = [
     { key: "Home", icon: <AiFillHome /> },
