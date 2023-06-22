@@ -8,6 +8,10 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 
 const Register = () => {
+  // axios.defaults.withCredentials = true;
+  const instance = axios.create({
+    withCredentials: true,
+  });
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -25,7 +29,7 @@ const Register = () => {
         return toast.error("Password and Confirm Password not matched");
       }
       setLoading(true);
-      const res = await axios.post(
+      const res = await instance.post(
         "https://ecommerce-backend-neo8.onrender.com/api/v1/users/register",
         {
           name,
@@ -50,7 +54,11 @@ const Register = () => {
     }
   };
 
-  if (localStorage.userInfo) router.replace("/");
+  if (typeof window !== "undefined") {
+    // Perform localStorage action
+    // const item = localStorage.getItem("key");
+    if (localStorage.userInfo) router.replace("/");
+  }
 
   if (loading) return <p>Loading...</p>;
 

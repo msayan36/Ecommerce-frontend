@@ -8,6 +8,10 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 
 const Login = () => {
+  // axios.defaults.withCredentials = true;
+  const instance = axios.create({
+    withCredentials: true,
+  });
   const [loginId, setLoginId] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -18,7 +22,7 @@ const Login = () => {
 
     try {
       setLoading(true);
-      const res = await axios.post(
+      const res = await instance.post(
         "https://ecommerce-backend-neo8.onrender.com/api/v1/users/login",
         {
           loginId,
@@ -35,10 +39,15 @@ const Login = () => {
       const { message } = JSON.parse(error.request.response);
       setLoading(false);
       toast.error(message);
+      console.log(error);
     }
   };
 
-  if (localStorage.userInfo) router.replace("/");
+  if (typeof window !== "undefined") {
+    // Perform localStorage action
+    // const item = localStorage.getItem("key");
+    if (localStorage.userInfo) router.replace("/");
+  }
 
   if (loading) return <p>Loading...</p>;
 
