@@ -41,7 +41,7 @@ const Navbar = () => {
         {list.map((item) => {
           return (
             <>
-              <Link href="" className="my-3 w-fit">
+              <Link key={item.key} href="" className="my-3 w-fit">
                 <Icon icon={item.icon} />
                 <span className=" text-white mx-4 font-semibold text-xl">
                   {item.key}
