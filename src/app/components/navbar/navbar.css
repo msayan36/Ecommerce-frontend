@@ -1,1 +1,11 @@
 /*# sourceMappingURL=navbar.css.map */
+.navIcon svg{
+    font-size:1.6rem;
+    color:white;
+    display: inline;
+}
+.navIcon .profImg{
+    height: 1.6rem;
+    width: 1.6rem;
+    display: inline;
+}

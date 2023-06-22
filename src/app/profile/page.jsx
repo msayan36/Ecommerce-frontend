@@ -1,14 +1,16 @@
+import Image from "next/image";
+import Link from "next/link";
 import "./profile.scss";
 import "../global.css";
+import "./page.css";
 import WhiteBtn from "../components/WhiteBtn";
-import Image from "next/image";
 import Navbar from "../components/navbar/Navbar";
-import { IoIosSettings } from "react-icons/io";
 import ProfileDetails from "../components/ProfileDetails";
+import { IoIosSettings } from "react-icons/io";
+import { AiFillStar } from "react-icons/ai";
 import ProfileImg from "./images/profile.png";
 import ProdImg from "./images/prod_img.png";
-import "./page.css";
-import { AiFillStar } from "react-icons/ai";
+
 const Profile = () => {
   let img = [1, 2, 3, 4, 5];
 
@@ -35,12 +37,12 @@ const Profile = () => {
                 <div className="text-xl font-semibold inline pr-5 py-1">
                   username
                 </div>
-                <div className="pr-5">
+                <Link href="" className="pr-5">
                   <WhiteBtn data="Edit Profile"></WhiteBtn>
-                </div>
-                <div className="py-1">
+                </Link>
+                <Link href="" className="my-1">
                   <IoIosSettings size={35}></IoIosSettings>
-                </div>
+                </Link>
               </div>
               <div className=" flex flex-row text-base pt-7">
                 <ProfileDetails
