@@ -51,7 +51,7 @@ const Profile = () => {
       // console.log(res);
       localStorage.removeItem("userInfo");
       setLoading(false);
-      toast.success("User Logged In Successfully");
+      toast.success("User Logged Out Successfully");
       router.replace("/register");
     } catch (error) {
       const { message } = JSON.parse(error.request.response);
