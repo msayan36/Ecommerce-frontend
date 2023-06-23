@@ -35,8 +35,9 @@ const EachProduct = () => {
               1236 reviews
             </div>
           </div>
-          <div className="text-sm font-md pb-4 text-white text-center absolute bottom-0 w-full">
-            Product Name
+          <div className="text-sm font-md pb-4 text-white text-center absolute bottom-0 w-full flex items-center justify-between px-4">
+            <span>Product Name </span>
+            <span>$500</span>
           </div>
         </div>
       </div>

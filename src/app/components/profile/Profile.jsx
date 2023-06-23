@@ -11,10 +11,11 @@ import Navbar from "../navbar/Navbar";
 import { IoIosSettings } from "react-icons/io";
 import ProfileDetails from "../ProfileDetails";
 import "./page.css";
-import { AiFillStar } from "react-icons/ai";
+import { AiFillStar, AiOutlineShoppingCart } from "react-icons/ai";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 import EachProduct from "./EachProduct";
+import Footer from "../footer/Footer";
 
 const Profile = () => {
   const [loading, setLoading] = useState(false);
@@ -93,19 +94,19 @@ const Profile = () => {
         <div className="basis-1/5">
           <Navbar />
         </div>
-        <div className="basis-4/5 pt-16 border-l-2 border-white ">
-          <div className="flex flex-row">
-            <div className=" basis-1/3 flex justify-end items-center pr-7 h-fit ">
+        <div className="basis-4/5 pt-16">
+          <div className="flex flex-row border-b-[1px] border-[#ffffff32] mr-2">
+            <div className="basis-1/3 flex justify-end items-center mr-20 h-fit">
               <Image
                 className=" "
                 src={ProfileImg}
                 alt="Profile Picture"
-                width={200}
-                height={200}
+                width={140}
+                height={140}
               ></Image>
             </div>
             <div className="basis-2/3 text-white">
-              <div className=" flex flex-row">
+              <div className="flex flex-row">
                 <div className="text-xl font-semibold inline pr-5 py-1">
                   {userInfo.username ? userInfo.username : "Username"}
                   {/* Username */}
@@ -123,7 +124,7 @@ const Profile = () => {
                   ></IoIosSettings>
                 </div> */}
               </div>
-              <div className=" flex flex-row text-base pt-7">
+              <div className=" flex flex-row text-base pt-4">
                 <ProfileDetails
                   details={{ figure: products_count, variable: "products" }}
                 ></ProfileDetails>
@@ -134,7 +135,7 @@ const Profile = () => {
                   details={{ figure: following_count, variable: "following" }}
                 ></ProfileDetails>
               </div>
-              <div className="text-base pt-7 pb-10 w-3/4">
+              <div className="text-base pt-4 pb-10 w-3/4">
                 <div>
                   {userInfo.name ? userInfo.name : "Name"}
                   {/* Name */}
@@ -148,10 +149,11 @@ const Profile = () => {
             </div>
           </div>
           <div className="text-center w-full mr-4 my-4 font-sans flex items-center justify-center">
-            <p className="border-b-2 text-white text-2xl w-fit">Products</p>
+            <AiOutlineShoppingCart className="mr-2 text-lg" />
+            <p className="text-white text-base font-semibold w-fit">PRODUCTS</p>
           </div>
 
-          <div className="flex flex-wrap flex-row w-fit pl-1">
+          <div className="flex flex-wrap flex-row w-fit px-10">
             {img.map((item) => (
               // <>
               <EachProduct key={item} />
@@ -170,6 +172,7 @@ const Profile = () => {
               <Image src={ProdImg} alt="Product Image"></Image>
             </div> */}
           </div>
+          <Footer />
         </div>
       </div>
     </>

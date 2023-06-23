@@ -3,8 +3,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import Navbar from "../navbar/Navbar";
 
-const Feedback = () => {
+const Feed = () => {
   const router = useRouter();
   if (typeof window !== "undefined") {
     // Perform localStorage action
@@ -13,10 +14,9 @@ const Feedback = () => {
   }
   return (
     <>
-      <h1 className="text-4xl font-bold">Main Page</h1>
-      <Link href="/profile">Profile</Link>
+      <Navbar />
     </>
   );
 };
 
-export default Feedback;
+export default Feed;

@@ -11,11 +11,11 @@ import "./navbar.css";
 import ProfileImg from "../profile/images/profile.png";
 const Navbar = () => {
   let list = [
-    { key: "Home", icon: <AiFillHome /> },
-    { key: "Search", icon: <AiOutlineSearch /> },
-    { key: "Cart", icon: <AiOutlineShoppingCart /> },
-    { key: "Wishlist", icon: <AiFillHeart /> },
-    { key: "Create", icon: <IoIosCreate /> },
+    { key: "Home", icon: <AiFillHome />, link: "/" },
+    { key: "Search", icon: <AiOutlineSearch />, link: "/search" },
+    { key: "Cart", icon: <AiOutlineShoppingCart />, link: "/cart" },
+    { key: "Wishlist", icon: <AiFillHeart />, link: "/wishlist" },
+    { key: "Create", icon: <IoIosCreate />, link: "/create" },
     {
       key: "Profile",
       icon: (
@@ -25,31 +25,41 @@ const Navbar = () => {
           alt="Profile Picture"
         ></Image>
       ),
+      link: "/profile",
     },
   ];
   const Icon = ({ icon }) => {
-    return <span className="navIcon ">{icon}</span>;
+    return <span className="navIcon">{icon}</span>;
   };
 
   return (
     <>
-      <div className="h-screen bg-black pl-20 fixed flex flex-col ">
-        <Link href="" className="text-white my-24 mr-12 font-bold text-2xl">
-          Ecommerce
-        </Link>
+      <div className="h-screen bg-black w-[15rem] fixed flex flex-col items-center border-r-[1px] border-[#ffffff32]">
+        <div className="flex flex-col">
+          <Link
+            href="/"
+            className="text-white my-12 mr-12 font-bold text-2xl cursor-pointer transition-all hover:text-red-300"
+          >
+            Ecommerce
+          </Link>
 
-        {list.map((item) => {
-          return (
-            <>
-              <Link href="" className="my-3 w-fit" key={item.key}>
-                <Icon icon={item.icon} />
-                <span className=" text-white mx-4 font-semibold text-xl">
-                  {item.key}
-                </span>
-              </Link>
-            </>
-          );
-        })}
+          {list.map((item) => {
+            return (
+              <>
+                <Link
+                  href={item.link}
+                  className="my-3 w-fit flex items-center cursor-pointer hover:-translate-y-1 transition-all"
+                  key={item.key}
+                >
+                  <Icon icon={item.icon} />
+                  <span className=" text-white mx-4 font-semibold text-xl">
+                    {item.key}
+                  </span>
+                </Link>
+              </>
+            );
+          })}
+        </div>
       </div>
     </>
   );

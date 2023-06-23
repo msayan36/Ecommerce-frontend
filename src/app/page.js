@@ -1,9 +1,9 @@
-import Feedback from "./components/feedback/Feedback";
+import Feed from "./components/feed/Feed";
 
 export default function Home() {
   return (
     <>
-      <Feedback />
+      <Feed />
     </>
   );
 }
