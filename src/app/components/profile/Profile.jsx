@@ -14,6 +14,7 @@ import "./page.css";
 import { AiFillStar } from "react-icons/ai";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
+import EachProduct from "./EachProduct";
 
 const Profile = () => {
   const [loading, setLoading] = useState(false);
@@ -133,7 +134,7 @@ const Profile = () => {
                   details={{ figure: following_count, variable: "following" }}
                 ></ProfileDetails>
               </div>
-              <div className=" text-base pt-7 pb-10 w-3/4">
+              <div className="text-base pt-7 pb-10 w-3/4">
                 <div>
                   {userInfo.name ? userInfo.name : "Name"}
                   {/* Name */}
@@ -146,41 +147,15 @@ const Profile = () => {
               </div>
             </div>
           </div>
-          <div className="text-center border-b-2 text-3xl text-white mb-1">
-            Products
+          <div className="text-center w-full mr-4 my-4 font-sans flex items-center justify-center">
+            <p className="border-b-2 text-white text-2xl w-fit">Products</p>
           </div>
 
           <div className="flex flex-wrap flex-row w-fit pl-1">
             {img.map((item) => (
-              <>
-                <div key={item} className="hov  w-1/3 pr-1 pb-1">
-                  <div className=" relative">
-                    <Image
-                      className="product"
-                      src={ProdImg}
-                      alt="Product Image"
-                    ></Image>
-                    <div className="prod_hover  absolute top-0 w-full h-full bg-black opacity-80">
-                      <div className="w-1/2 mx-28 text-center mt-auto absolute py-48">
-                        <span className="text-sm font-bold text-white inline">
-                          4.8
-                        </span>
-                        <AiFillStar
-                          className="inline"
-                          color="white"
-                        ></AiFillStar>
-                        <div className="text-xs text-white font-semibold">
-                          1236 reviews
-                        </div>
-                      </div>
-
-                      <div className="text-sm font-md pb-4 text-white text-center absolute bottom-0 w-1/2 mx-28  ">
-                        Product Name
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </>
+              // <>
+              <EachProduct key={item} />
+              // </>
             ))}
             {/*             <div className="w-1/3 pr-1 pb-1">
               <Image src={ProdImg} alt="Product Image"></Image>

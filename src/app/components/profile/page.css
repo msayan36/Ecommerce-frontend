@@ -1,6 +1,6 @@
-.prod_hover{
-    display: none;
+.prod_not_hover {
+  display: none;
 }
-.product:hover + .prod_hover{
-    display: block;
+.prod_hover {
+  display: block;
 }
