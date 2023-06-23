@@ -5,16 +5,21 @@ import ProfileImg from "./images/profile.png";
 import ProdImg from "./images/prod_img.png";
 import "../../global.css";
 import WhiteBtn from "../WhiteBtn";
+import BlackBtn from "../BlackBtn";
 import Image from "next/image";
 import Navbar from "../navbar/Navbar";
 import { IoIosSettings } from "react-icons/io";
 import ProfileDetails from "../ProfileDetails";
 import "./page.css";
 import { AiFillStar } from "react-icons/ai";
+import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 
 const Profile = () => {
   const [loading, setLoading] = useState(false);
   const [userInfo, setUserInfo] = useState({});
+  const [logout, setLogout] = useState(false);
+  const router = useRouter();
 
   let img = [1, 2, 3, 4, 5];
 
@@ -36,9 +41,35 @@ const Profile = () => {
     setLoading(false);
   };
 
+  const handleLogout = async () => {
+    try {
+      setLoading(true);
+      const res = await instance.get(
+        `${process.env.NEXT_PUBLIC_SERVER_URL}/users/logout`
+      );
+      // console.log(res);
+      localStorage.removeItem("userInfo");
+      setLoading(false);
+      toast.success("User Logged In Successfully");
+      router.replace("/register");
+    } catch (error) {
+      const { message } = JSON.parse(error.request.response);
+      setLoading(false);
+      toast.error(message);
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     apiCall();
   }, []);
+
+  useEffect(() => {
+    if (logout === true) {
+      handleLogout();
+      setLogout(false);
+    }
+  }, [logout]);
 
   const products_count = userInfo.products_count
     ? userInfo.products_count.length
@@ -46,7 +77,13 @@ const Profile = () => {
   const followers_count = userInfo.followers ? userInfo.followers.length : 0;
   const following_count = userInfo.following ? userInfo.following.length : 0;
 
-  if (loading) return <p>Loading</p>;
+  if (typeof window !== "undefined") {
+    // Perform localStorage action
+    // const item = localStorage.getItem("key");
+    if (!localStorage.userInfo) router.replace("/register");
+  }
+
+  if (loading) return <p>Loading...</p>;
 
   return (
     <>
@@ -75,9 +112,15 @@ const Profile = () => {
                 <div className="pr-5">
                   <WhiteBtn data="Edit Profile"></WhiteBtn>
                 </div>
-                <div className="py-1">
-                  <IoIosSettings size={35}></IoIosSettings>
+                <div className="pr-5">
+                  <BlackBtn data="Logout" setLogout={setLogout}></BlackBtn>
                 </div>
+                {/* <div className="py-1">
+                  <IoIosSettings
+                    className="hover:cursor-pointer"
+                    size={35}
+                  ></IoIosSettings>
+                </div> */}
               </div>
               <div className=" flex flex-row text-base pt-7">
                 <ProfileDetails
