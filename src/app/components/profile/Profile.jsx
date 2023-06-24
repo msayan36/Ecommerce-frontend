@@ -112,7 +112,7 @@ const Profile = () => {
                   {/* Username */}
                 </div>
                 <div className="pr-5">
-                  <WhiteBtn data="Edit Profile"></WhiteBtn>
+                  <WhiteBtn data="Edit Profile" link="/edit-profile"></WhiteBtn>
                 </div>
                 <div className="pr-5">
                   <BlackBtn data="Logout" setLogout={setLogout}></BlackBtn>
