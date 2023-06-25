@@ -34,11 +34,11 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="h-screen bg-black w-[15rem] fixed flex flex-col items-center border-r-[1px] border-[#ffffff32]">
+      <div className="h-screen bg-black w-[15rem] fixed flex flex-col items-center ">
         <div className="flex flex-col">
           <Link
             href="/"
-            className="text-white my-12 mr-12 font-bold text-2xl cursor-pointer transition-all hover:text-red-300"
+            className="text-white my-12  font-bold text-2xl cursor-pointer transition-all hover:text-red-300"
           >
             Ecommerce
           </Link>
