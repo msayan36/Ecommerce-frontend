@@ -1,8 +1,8 @@
 "use client";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import ProfileImg from "./images/profile.png";
-import ProdImg from "./images/prod_img.png";
+import ProfileImg from "../profile/images/profile.png";
+import ProdImg from "../profile/images/prod_img.png";
 import "../../global.css";
 import WhiteBtn from "../WhiteBtn";
 import BlackBtn from "../BlackBtn";
@@ -10,61 +10,68 @@ import Image from "next/image";
 import Navbar from "../navbar/Navbar";
 import { IoIosSettings } from "react-icons/io";
 import ProfileDetails from "../ProfileDetails";
-import "./page.css";
+import "../profile/page.css";
 import { AiFillStar, AiOutlineShoppingCart } from "react-icons/ai";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
-import EachProduct from "./EachProduct";
+import EachProduct from "../profile/EachProduct";
 import Footer from "../footer/Footer";
 
-const Profile = () => {
+const Username = () => {
+  const router = useRouter();
+  if (typeof window !== "undefined") {
+    // Perform localStorage action
+    // const item = localStorage.getItem("key");
+    if (!localStorage.userInfo) router.replace("/register");
+    if (
+      window.location.pathname.slice(1) ===
+      JSON.parse(localStorage.userInfo).username
+    ) {
+      router.replace("/profile");
+    }
+  }
+
   const [loading, setLoading] = useState(false);
   const [userInfo, setUserInfo] = useState({});
   const [productInfo, setProductInfo] = useState({});
-  const [logout, setLogout] = useState(false);
-  const router = useRouter();
 
-  let img = [1, 2, 3, 4, 5];
+  // const products_count = 0;
+  // const followers_count = 0;
+  // const following_count = 0;
 
-  // axios.defaults.withCredentials = true;
   const instance = axios.create({
     withCredentials: true,
   });
 
   const apiCall = async () => {
-    setLoading(true);
-    const res = await instance.get(
-      `${process.env.NEXT_PUBLIC_SERVER_URL}/users/me`
-    );
-
-    const productRes = await instance.get(
-      `${process.env.NEXT_PUBLIC_SERVER_URL}/products/${res.data.username}`
-    );
-
-    // console.log(res.data);
-    // console.log(res.data.username);
-    // console.log(res.data.name);
-    setUserInfo(res.data);
-    setProductInfo(productRes.data);
-    setLoading(false);
-  };
-
-  const handleLogout = async () => {
-    try {
+    if (typeof window !== "undefined") {
+      // console.log(window.location.pathname.slice(1));
       setLoading(true);
-      const res = await instance.get(
-        `${process.env.NEXT_PUBLIC_SERVER_URL}/users/logout`
-      );
-      // console.log(res);
-      localStorage.removeItem("userInfo");
-      setLoading(false);
-      toast.success("User Logged Out Successfully");
-      router.replace("/register");
-    } catch (error) {
-      const { message } = JSON.parse(error.request.response);
-      setLoading(false);
-      toast.error(message);
-      console.log(error);
+      try {
+        const res = await instance.get(
+          `${
+            process.env.NEXT_PUBLIC_SERVER_URL
+          }/users/${window.location.pathname.slice(1)}`
+        );
+
+        const productRes = await instance.get(
+          `${
+            process.env.NEXT_PUBLIC_SERVER_URL
+          }/products/${window.location.pathname.slice(1)}`
+        );
+
+        // console.log(res.data);
+        // console.log(res.data.username);
+        // console.log(res.data.name);
+        setUserInfo(res.data);
+        setProductInfo(productRes.data);
+        setLoading(false);
+      } catch (error) {
+        console.log(error);
+        if (error.response.data.message === "User not Found")
+          router.replace("/not-found/404");
+        setLoading(false);
+      }
     }
   };
 
@@ -72,26 +79,11 @@ const Profile = () => {
     apiCall();
   }, []);
 
-  useEffect(() => {
-    if (logout === true) {
-      handleLogout();
-      setLogout(false);
-    }
-  }, [logout]);
-
   const products_count = userInfo.products_count
     ? userInfo.products_count.length
     : 0;
   const followers_count = userInfo.followers ? userInfo.followers.length : 0;
   const following_count = userInfo.following ? userInfo.following.length : 0;
-
-  if (typeof window !== "undefined") {
-    // Perform localStorage action
-    // const item = localStorage.getItem("key");
-    if (!localStorage.userInfo) router.replace("/register");
-  }
-
-  // console.log(productInfo);
 
   if (loading) return <p>Loading...</p>;
 
@@ -120,10 +112,10 @@ const Profile = () => {
                   {/* Username */}
                 </div>
                 <div className="pr-5">
-                  <WhiteBtn data="Edit Profile" link="/edit-profile"></WhiteBtn>
+                  <WhiteBtn data="Follow"></WhiteBtn>
                 </div>
                 <div className="pr-5">
-                  <BlackBtn data="Logout" setLogout={setLogout}></BlackBtn>
+                  {/* <BlackBtn data="Following"></BlackBtn> */}
                 </div>
                 {/* <div className="py-1">
                   <IoIosSettings
@@ -152,6 +144,7 @@ const Profile = () => {
                   {userInfo.profileDesc
                     ? userInfo.profileDesc
                     : "No Profile Description"}
+                  {/* Profile Desc */}
                 </div>
               </div>
             </div>
@@ -169,7 +162,7 @@ const Profile = () => {
                   // </>
                 ))
               : "No Products Added Yet"}
-            {/*             <div className="w-1/3 pr-1 pb-1">
+            {/* <div className="w-1/3 pr-1 pb-1">
               <Image src={ProdImg} alt="Product Image"></Image>
             </div>
             <div className="w-1/3 pr-1 pb-1">
@@ -189,4 +182,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default Username;
