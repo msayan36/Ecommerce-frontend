@@ -20,7 +20,7 @@ const Navbar = () => {
       key: "Profile",
       icon: (
         <Image
-          className="profImg "
+          className="profImg"
           src={ProfileImg}
           alt="Profile Picture"
         ></Image>
@@ -34,7 +34,7 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="h-screen bg-black w-[15rem] fixed flex flex-col items-center ">
+      <div className="h-screen bg-black w-[15rem] fixed flex flex-col items-center border-r-[1px] border-[#ffffff32]">
         <div className="flex flex-col">
           <Link
             href="/"
@@ -43,13 +43,13 @@ const Navbar = () => {
             Ecommerce
           </Link>
 
-          {list.map((item) => {
+          {list.map((item, idx) => {
             return (
               <>
                 <Link
                   href={item.link}
                   className="my-3 w-fit flex items-center cursor-pointer hover:-translate-y-1 transition-all"
-                  key={item.key}
+                  key={idx}
                 >
                   <Icon icon={item.icon} />
                   <span className=" text-white mx-4 font-semibold text-xl">
