@@ -1,8 +1,8 @@
 import "./globals.scss";
-import { Inter } from "next/font/google";
+import { Sora } from "next/font/google";
 import "react-toastify/dist/ReactToastify.css";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Sora({weight:[ '400',  '700', ], subsets: ["latin"] });
 
 export const metadata = {
   title: "Ecommerce",

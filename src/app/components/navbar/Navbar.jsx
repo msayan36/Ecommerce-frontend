@@ -48,8 +48,8 @@ const Navbar = () => {
               <>
                 <Link
                   href={item.link}
-                  className="my-3 w-fit flex items-center cursor-pointer hover:-translate-y-1 transition-all"
-                  key={idx}
+                  className="my-4 w-fit flex items-center cursor-pointer hover:-translate-y-1 transition-all"
+                  key={item.key}
                 >
                   <Icon icon={item.icon} />
                   <span className=" text-white mx-4 font-semibold text-xl">
