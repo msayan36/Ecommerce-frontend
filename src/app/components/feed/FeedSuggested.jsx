@@ -14,30 +14,38 @@ const FeedSuggested = ({ profile }) => {
                 href=""
                 className=" items-center flex justify-between my-7 mx-8"
               >
-                <div className="inline-flex">
-                  <Image
-                    className="inline "
-                    src={profilesImg}
-                    height={40}
-                    width={40}
-                    alt="User Image"
-                  ></Image>
-                  <div className="inline-flex flex-col pl-2">
-                    <div href="" className="inline text-sm font-semibold ">
+                <div className="inline-flex text-left">
+                  <Link href="">
+                    <Image
+                      className="inline "
+                      src={profilesImg}
+                      height={40}
+                      width={40}
+                      alt="User Image"
+                    ></Image>
+                  </Link>
+                  <Link
+                    href=""
+                    className="cursor-pointer inline-flex flex-col pl-2"
+                  >
+                    <div href="" className="inline text-sm font-md ">
                       {item.uname}
                     </div>
                     <div
                       href=""
-                      className="inline text-slate-300 text-xs font-light "
+                      className="inline text-slate-400 text-xs font-extralight "
                     >
                       {item.pname}
                     </div>
-                  </div>
+                  </Link>
                 </div>
 
-                <div className="inline-block text-sm  align-middle text-blue-700 justify-end">
+                <Link
+                  href=""
+                  className="inline-block text-sm  align-middle text-blue-700 justify-end"
+                >
                   Follow
-                </div>
+                </Link>
               </div>
             </>
           ))}
