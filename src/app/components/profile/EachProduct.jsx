@@ -35,7 +35,7 @@ const EachProduct = ({ productDet }) => {
                 : productDet.rating.reduce(
                     (total, item) => total + item.value,
                     0
-                  )}
+                  ) / productDet.rating.length}
             </span>
             {productDet.rating.length > 0 && (
               <AiFillStar className="inline" color="white"></AiFillStar>
