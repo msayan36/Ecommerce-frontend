@@ -15,7 +15,7 @@ const Navbar = () => {
     { key: "Search", icon: <AiOutlineSearch />, link: "/search" },
     { key: "Cart", icon: <AiOutlineShoppingCart />, link: "/cart" },
     { key: "Wishlist", icon: <AiFillHeart />, link: "/wishlist" },
-    { key: "Create", icon: <IoIosCreate />, link: "/create" },
+    { key: "Create", icon: <IoIosCreate />, link: "/add-product" },
     {
       key: "Profile",
       icon: (

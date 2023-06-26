@@ -20,6 +20,7 @@ import Footer from "../footer/Footer";
 const Profile = () => {
   const [loading, setLoading] = useState(false);
   const [userInfo, setUserInfo] = useState({});
+  const [productInfo, setProductInfo] = useState({});
   const [logout, setLogout] = useState(false);
   const router = useRouter();
 
@@ -36,10 +37,15 @@ const Profile = () => {
       `${process.env.NEXT_PUBLIC_SERVER_URL}/users/me`
     );
 
+    const productRes = await instance.get(
+      `${process.env.NEXT_PUBLIC_SERVER_URL}/products/${res.data.username}`
+    );
+
     // console.log(res.data);
     // console.log(res.data.username);
     // console.log(res.data.name);
     setUserInfo(res.data);
+    setProductInfo(productRes.data);
     setLoading(false);
   };
 
@@ -84,6 +90,8 @@ const Profile = () => {
     // const item = localStorage.getItem("key");
     if (!localStorage.userInfo) router.replace("/register");
   }
+
+  // console.log(productInfo);
 
   if (loading) return <p>Loading...</p>;
 
@@ -154,11 +162,13 @@ const Profile = () => {
           </div>
 
           <div className="flex flex-wrap flex-row w-fit px-10">
-            {img.map((item) => (
-              // <>
-              <EachProduct key={item} />
-              // </>
-            ))}
+            {productInfo.length > 0
+              ? productInfo.map((item) => (
+                  // <>
+                  <EachProduct key={item._id} productDet={item} />
+                  // </>
+                ))
+              : "No Products Added Yet"}
             {/*             <div className="w-1/3 pr-1 pb-1">
               <Image src={ProdImg} alt="Product Image"></Image>
             </div>
