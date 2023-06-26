@@ -48,7 +48,7 @@ const Navbar = () => {
               <>
                 <Link
                   href={item.link}
-                  className="my-3 w-fit flex items-center cursor-pointer hover:-translate-y-1 transition-all"
+                  className="my-4 w-fit flex items-center cursor-pointer hover:-translate-y-1 transition-all"
                   key={item.key}
                 >
                   <Icon icon={item.icon} />
