@@ -15,12 +15,12 @@ const Navbar = () => {
     { key: "Search", icon: <AiOutlineSearch />, link: "/search" },
     { key: "Cart", icon: <AiOutlineShoppingCart />, link: "/cart" },
     { key: "Wishlist", icon: <AiFillHeart />, link: "/wishlist" },
-    { key: "Create", icon: <IoIosCreate />, link: "/create" },
+    { key: "Create", icon: <IoIosCreate />, link: "/add-product" },
     {
       key: "Profile",
       icon: (
         <Image
-          className="profImg "
+          className="profImg"
           src={ProfileImg}
           alt="Profile Picture"
         ></Image>
@@ -34,7 +34,7 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="h-screen bg-black w-[15rem] fixed flex flex-col items-center ">
+      <div className="h-screen bg-black w-[15rem] fixed flex flex-col items-center border-r-[1px] border-[#ffffff32]">
         <div className="flex flex-col">
           <Link
             href="/"
@@ -43,7 +43,7 @@ const Navbar = () => {
             Ecommerce
           </Link>
 
-          {list.map((item) => {
+          {list.map((item, idx) => {
             return (
               <>
                 <Link

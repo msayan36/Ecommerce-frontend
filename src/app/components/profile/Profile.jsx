@@ -20,6 +20,7 @@ import Footer from "../footer/Footer";
 const Profile = () => {
   const [loading, setLoading] = useState(false);
   const [userInfo, setUserInfo] = useState({});
+  const [productInfo, setProductInfo] = useState({});
   const [logout, setLogout] = useState(false);
   const router = useRouter();
 
@@ -36,10 +37,15 @@ const Profile = () => {
       `${process.env.NEXT_PUBLIC_SERVER_URL}/users/me`
     );
 
+    const productRes = await instance.get(
+      `${process.env.NEXT_PUBLIC_SERVER_URL}/products/${res.data.username}`
+    );
+
     // console.log(res.data);
     // console.log(res.data.username);
     // console.log(res.data.name);
     setUserInfo(res.data);
+    setProductInfo(productRes.data);
     setLoading(false);
   };
 
@@ -85,6 +91,8 @@ const Profile = () => {
     if (!localStorage.userInfo) router.replace("/register");
   }
 
+  // console.log(productInfo);
+
   if (loading) return <p>Loading...</p>;
 
   return (
@@ -94,7 +102,7 @@ const Profile = () => {
         <div className="basis-2/12">
           <Navbar />
         </div>
-        <div className="basis-10/12 pt-16 border-l-[1px] border-[#ffffff32]">
+        <div className="basis-10/12 pt-16">
           <div className="flex flex-row border-b-[1px] border-[#ffffff32] mr-2">
             <div className="basis-1/3 flex justify-end items-center mr-20 h-fit">
               <Image
@@ -105,7 +113,7 @@ const Profile = () => {
                 height={140}
               ></Image>
             </div>
-            <div className="basis-2/3 text-white">
+            <div className="text-white">
               <div className="flex flex-row">
                 <div className="text-xl font-semibold inline pr-5 py-1">
                   {userInfo.username ? userInfo.username : "Username"}
@@ -148,17 +156,19 @@ const Profile = () => {
               </div>
             </div>
           </div>
-          <div className="text-center w-full mr-4 my-4 font-sans flex items-center justify-center">
+          <div className="text-center my-4 font-sans flex items-center justify-center">
             <AiOutlineShoppingCart className="mr-2 text-lg" />
             <p className="text-white text-base font-semibold w-fit">PRODUCTS</p>
           </div>
 
-          <div className="flex flex-wrap flex-row w-fit px-10">
-            {img.map((item) => (
-              // <>
-              <EachProduct key={item} />
-              // </>
-            ))}
+          <div className="flex flex-wrap flex-row px-10 ml-8">
+            {productInfo.length > 0
+              ? productInfo.map((item) => (
+                  // <>
+                  <EachProduct key={item._id} productDet={item} />
+                  // </>
+                ))
+              : "No Products Added Yet"}
             {/*             <div className="w-1/3 pr-1 pb-1">
               <Image src={ProdImg} alt="Product Image"></Image>
             </div>

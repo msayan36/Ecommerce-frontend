@@ -4,7 +4,7 @@ import Image from "next/image";
 import ProdImg from "./images/prod_img.png";
 import { AiFillStar } from "react-icons/ai";
 
-const EachProduct = () => {
+const EachProduct = ({ productDet }) => {
   const [hover, setHover] = useState(false);
 
   const mouseOver = () => {
@@ -29,15 +29,25 @@ const EachProduct = () => {
           }  absolute top-0 w-full h-full bg-black opacity-80 flex flex-col items-center justify-center`}
         >
           <div className="w-full top-1/3 text-center mt-auto absolute">
-            <span className="text-sm font-bold text-white inline">4.8</span>
-            <AiFillStar className="inline" color="white"></AiFillStar>
+            <span className="text-sm font-bold text-white inline">
+              {productDet.rating.length === 0
+                ? "No Ratings Yet"
+                : productDet.rating.reduce(
+                    (total, item) => total + item.value,
+                    0
+                  )}
+            </span>
+            {productDet.rating.length > 0 && (
+              <AiFillStar className="inline" color="white"></AiFillStar>
+            )}
             <div className="text-xs mt-2 text-white font-semibold">
-              1236 reviews
+              {productDet.rating.length}{" "}
+              {productDet.rating.length === 1 ? "review" : "reviews"}
             </div>
           </div>
           <div className="text-sm font-md pb-4 text-white text-center absolute bottom-0 w-full flex items-center justify-between px-4">
-            <span>Product Name </span>
-            <span>$500</span>
+            <span>{productDet.productName}</span>
+            <span>${productDet.price}</span>
           </div>
         </div>
       </div>
