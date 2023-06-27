@@ -32,7 +32,7 @@ const FeedFollowing = ({ profiles }) => {
               <Link
                 key={profiles.name}
                 href=""
-                className="text-center  pr-7  hover:scale-95 ease-in-out duration-200  "
+                className="text-center  px-4  hover:scale-95 ease-in-out duration-200  "
               >
                 <Image
                   className="mx-auto"

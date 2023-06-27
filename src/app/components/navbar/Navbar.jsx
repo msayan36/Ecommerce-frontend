@@ -34,7 +34,7 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="h-screen bg-black w-[15rem] fixed flex flex-col items-center border-r-[1px] border-[#ffffff32]">
+      <div className="h-screen bg-black flex flex-col items-center border-r-[1px] border-[#ffffff32]">
         <div className="flex flex-col">
           <Link
             href="/"

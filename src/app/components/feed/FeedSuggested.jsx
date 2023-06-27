@@ -5,7 +5,7 @@ import profilesImg from "./images/profiles.png";
 const FeedSuggested = ({ profile }) => {
   return (
     <>
-      <div className="mx-auto text-center">
+      <div className="mx-auto text-center border-l-[1px] border-[#ffffff32] h-screen">
         <div className="font-light text-md pt-10 pb-10">Suggested for you</div>
         <div>
           {profile.map((item) => (

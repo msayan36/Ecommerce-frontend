@@ -161,7 +161,7 @@ const Profile = () => {
             <p className="text-white text-base font-semibold w-fit">PRODUCTS</p>
           </div>
 
-          <div className="flex flex-wrap flex-row px-10 ml-8">
+          <div className="flex flex-wrap flex-row px-10">
             {productInfo.length > 0
               ? productInfo.map((item) => (
                   // <>
