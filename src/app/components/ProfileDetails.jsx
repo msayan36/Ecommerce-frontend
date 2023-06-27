@@ -17,7 +17,9 @@ const ProfileDetails = ({ details }) => {
           <div className="font-semibold inline pr-1">{details.figure}</div>
           <div className="font-extralight inline">
             {details.figure === 1
-              ? details.variable === "followers" && "Follower"
+              ? details.variable === "followers"
+                ? "Follower"
+                : "Following"
               : details.variable.slice(0, 1).toUpperCase() +
                 details.variable.slice(1)}
           </div>
