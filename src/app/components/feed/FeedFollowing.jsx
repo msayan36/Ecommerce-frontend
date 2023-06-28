@@ -45,8 +45,6 @@ const FeedFollowing = ({ profiles }) => {
     feedFollowingCall();
   }, []);
 
-  console.log(feedFollowingDet);
-
   if (loading) return <p>Loading...</p>;
 
   return (

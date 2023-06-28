@@ -47,7 +47,7 @@ const Feed = () => {
           <Navbar />
         </div>
         <div className="basis-7/12 h-screen overflow-x-hidden scrollbar-hide">
-          <FeedFollowing profiles={profiles} />
+          <FeedFollowing />
           <FeedItems profiles={profiles} />
         </div>
         <div className="basis-3/12 ">
