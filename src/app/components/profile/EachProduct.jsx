@@ -1,9 +1,17 @@
 import { useState } from "react";
+import React from "react";
 import "./page.css";
 import Image from "next/image";
+import Link from "next/link";
 import ProdImg from "./images/prod_img.png";
-import { AiFillStar } from "react-icons/ai";
+import ProfileImg from "./images/profile.png";
+import {
+  AiOutlineHeart,
+  AiOutlineShoppingCart,
+  AiFillStar,
+} from "react-icons/ai";
 
+import Modal from "react-modal";
 const EachProduct = ({ productDet }) => {
   const [hover, setHover] = useState(false);
 
@@ -14,14 +22,19 @@ const EachProduct = ({ productDet }) => {
   const mouseOut = () => {
     setHover(false);
   };
-
+  const [isOpen, setIsOpen] = useState(false);
+  const customStyles = {
+    overlay: {
+      backgroundColor: "rgba(0, 0, 0, 0.6)",
+    },
+  };
   return (
     <div
       onMouseEnter={mouseOver}
       onMouseLeave={mouseOut}
       className="cursor-pointer w-1/3 pr-1 pb-1"
     >
-      <div className=" relative">
+      <div onClick={() => setIsOpen(true)} className=" relative">
         <Image className="product" src={ProdImg} alt="Product Image"></Image>
         <div
           className={`prod_not_hover ${
@@ -51,6 +64,75 @@ const EachProduct = ({ productDet }) => {
           </div>
         </div>
       </div>
+
+      <Modal
+        isOpen={isOpen}
+        className="focus:outline-none bg-none w-7/12 mx-auto my-auto "
+        onRequestClose={() => setIsOpen(false)}
+        style={customStyles}
+      >
+        <div className="bg-slate-950 px-5 py-5 w-fit grid grid-flow-col grid-cols-2 relative">
+          <Image
+            className="product w-full cols "
+            src={ProdImg}
+            alt="Product Image"
+          ></Image>
+          <div className="text-white pl-5 w-full  flex flex-col justify-between">
+            <div className="border-b-[1px] border-[#ffffff32] pt-2 pb-4 ">
+              <Image
+                className=" inline"
+                src={ProfileImg}
+                alt="Profile Picture"
+                width={30}
+                height={30}
+              ></Image>
+              <div className=" inline text-md font-md ml-2">username</div>
+            </div>
+            <div>
+              <div className="flex justify-between ">
+                <div className="text-2xl font-light">Product Name</div>
+                <div className="text-2xl font-light">₹0000</div>
+              </div>
+              <div className="text-sm pt-2 text-slate-300 font-extralight">
+                Product Description Lorem ipsum dolor sit amet consectetur
+                adipisicing elit. Excepturi iusto impedit delectus odit earum
+                omnis iste quo error, reiciendis, eligendi dolores odio nostrum
+                quam
+              </div>
+            </div>
+
+            <div className="my-1 bg-slate-200 px-3 hover:text-white hover:bg-cyan-200/75 transition-all py-3 text-black w-40 text-center rounded-lg">
+              Buy Now
+            </div>
+            <div className="border-t-[1px] border-[#ffffff32] ">
+              <div className="flex ">
+                <Link href="" className="likebtn">
+                  <AiOutlineHeart
+                    className=" inline"
+                    color="white"
+                    size={30}
+                  ></AiOutlineHeart>
+                </Link>
+
+                <AiOutlineShoppingCart
+                  className="inline"
+                  color="white"
+                  size={30}
+                ></AiOutlineShoppingCart>
+                <div className="ml-auto">
+                  <AiFillStar
+                    className="inline"
+                    color="white"
+                    size={25}
+                  ></AiFillStar>
+
+                  <div className="inline font-semibold text-sm pl-1">3.8</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </Modal>
     </div>
   );
 };
