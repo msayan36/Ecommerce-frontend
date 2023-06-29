@@ -92,7 +92,9 @@ const Search = () => {
                 ) : searchRes.length === 0 ? (
                   <p>No Users Found</p>
                 ) : (
-                  searchRes.map((item) => <SearchResult searchResult={item} />)
+                  searchRes.map((item) => (
+                    <SearchResult key={item._id} searchResult={item} />
+                  ))
                 )}
               </div>
             </>
