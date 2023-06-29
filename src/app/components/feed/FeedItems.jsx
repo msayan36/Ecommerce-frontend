@@ -117,7 +117,15 @@ const FeedItems = ({ profiles }) => {
               </div>
             </div>
 
-            <div className="text-sm font-light mb-2">{item.productDesc}</div>
+            <div className="">
+              <div className="text-sm font-extralight text-justify mb-2">
+                {item.productDesc}
+              </div>
+              <button className="my-4 bg-slate-200 px-2 hover:text-white hover:bg-cyan-200/75 transition-all py-2 text-black w-32 text-center rounded-lg">
+                Buy Now
+              </button>
+            </div>
+
             <Link
               href="/"
               className="text-sm font-xs text-slate-300 font-light hover:text-slate-100 cursor-default"
