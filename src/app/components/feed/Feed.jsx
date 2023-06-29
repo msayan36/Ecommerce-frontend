@@ -48,10 +48,10 @@ const Feed = () => {
         </div>
         <div className="basis-7/12 h-screen overflow-x-hidden scrollbar-hide">
           <FeedFollowing />
-          <FeedItems profiles={profiles} />
+          <FeedItems />
         </div>
         <div className="basis-3/12 ">
-          <FeedSuggested profile={suggProf} />
+          <FeedSuggested />
         </div>
       </div>
     </>

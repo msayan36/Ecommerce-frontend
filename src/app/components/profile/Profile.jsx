@@ -96,13 +96,13 @@ const Profile = () => {
   if (loading) return <p>Loading...</p>;
 
   return (
-    <>
+    <div className="overflow-y-hidden">
       <div></div>
       <div className="flex flex-row bg-black h-full ">
         <div className="basis-2/12">
           <Navbar />
         </div>
-        <div className="basis-10/12 pt-16">
+        <div className="basis-10/12 pt-16 h-screen overflow-x-hidden scrollbar-hide">
           <div className="flex flex-row border-b-[1px] border-[#ffffff32] mr-2">
             <div className="basis-1/3 flex justify-end items-center mr-20 h-fit">
               <Image
@@ -185,7 +185,7 @@ const Profile = () => {
           <Footer />
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

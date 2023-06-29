@@ -32,7 +32,7 @@ const EachProduct = ({ productDet }) => {
     <div
       onMouseEnter={mouseOver}
       onMouseLeave={mouseOut}
-      className="cursor-pointer w-1/3 pr-1 pb-1"
+      className={`cursor-pointer w-1/3 pr-1 pb-1`}
     >
       <div onClick={() => setIsOpen(true)} className=" relative">
         <Image className="product" src={ProdImg} alt="Product Image"></Image>
@@ -67,7 +67,7 @@ const EachProduct = ({ productDet }) => {
 
       <Modal
         isOpen={isOpen}
-        className="focus:outline-none bg-none w-7/12 mx-auto my-auto "
+        className="focus:outline-none bg-none w-10/12 mx-auto my-auto"
         onRequestClose={() => setIsOpen(false)}
         style={customStyles}
       >
@@ -77,35 +77,37 @@ const EachProduct = ({ productDet }) => {
             src={ProdImg}
             alt="Product Image"
           ></Image>
-          <div className="text-white pl-5 w-full  flex flex-col justify-between">
-            <div className="border-b-[1px] border-[#ffffff32] pt-2 pb-4 ">
-              <Image
-                className=" inline"
-                src={ProfileImg}
-                alt="Profile Picture"
-                width={30}
-                height={30}
-              ></Image>
-              <div className=" inline text-md font-md ml-2">username</div>
-            </div>
+          <div className="text-white pl-5 w-full flex flex-col justify-between">
             <div>
-              <div className="flex justify-between ">
-                <div className="text-2xl font-light">Product Name</div>
-                <div className="text-2xl font-light">₹0000</div>
+              <div className="border-b-[1px] border-[#ffffff32] pt-2 pb-4 ">
+                <Image
+                  className=" inline"
+                  src={ProfileImg}
+                  alt="Profile Picture"
+                  width={30}
+                  height={30}
+                ></Image>
+                <div className=" inline text-md font-md ml-2">
+                  {productDet.username}
+                </div>
               </div>
-              <div className="text-sm pt-2 text-slate-300 font-extralight">
-                Product Description Lorem ipsum dolor sit amet consectetur
-                adipisicing elit. Excepturi iusto impedit delectus odit earum
-                omnis iste quo error, reiciendis, eligendi dolores odio nostrum
-                quam
+              <div className="mt-10 mb-8">
+                <div className="flex justify-between ">
+                  <div className="text-2xl font-light">
+                    {productDet.productName}
+                  </div>
+                  <div className="text-2xl font-light">₹{productDet.price}</div>
+                </div>
+                <div className="text-sm pt-2 text-slate-300 font-extralight">
+                  {productDet.productDesc}
+                </div>
               </div>
+              <button className="my-1 bg-slate-200 px-3 hover:text-white hover:bg-cyan-200/75 transition-all py-3 text-black w-40 text-center rounded-lg">
+                Buy Now
+              </button>
             </div>
-
-            <div className="my-1 bg-slate-200 px-3 hover:text-white hover:bg-cyan-200/75 transition-all py-3 text-black w-40 text-center rounded-lg">
-              Buy Now
-            </div>
-            <div className="border-t-[1px] border-[#ffffff32] ">
-              <div className="flex ">
+            <div className="border-t-[1px] border-[#ffffff32] py-2">
+              <div className="flex items-center">
                 <Link href="" className="likebtn">
                   <AiOutlineHeart
                     className=" inline"
@@ -120,13 +122,22 @@ const EachProduct = ({ productDet }) => {
                   size={30}
                 ></AiOutlineShoppingCart>
                 <div className="ml-auto">
-                  <AiFillStar
-                    className="inline"
-                    color="white"
-                    size={25}
-                  ></AiFillStar>
+                  {productDet.rating.length > 0 && (
+                    <AiFillStar
+                      className="inline"
+                      color="white"
+                      size={25}
+                    ></AiFillStar>
+                  )}
 
-                  <div className="inline font-semibold text-sm pl-1">3.8</div>
+                  <div className="inline font-semibold text-sm pl-1">
+                    {productDet.rating.length === 0
+                      ? "No Ratings Yet"
+                      : productDet.rating.reduce(
+                          (total, item) => total + item.value,
+                          0
+                        ) / productDet.rating.length}
+                  </div>
                 </div>
               </div>
             </div>

@@ -46,7 +46,7 @@ const FeedItems = ({ profiles }) => {
       {productFeed.map((item) => (
         <>
           <div
-            key={profiles._id}
+            key={item._id}
             className="mx-auto w-8/12 pb-10 my-10 border-b-[1px] border-[#ffffff32]"
           >
             <div>
