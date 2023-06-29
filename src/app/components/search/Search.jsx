@@ -83,7 +83,7 @@ const Search = () => {
           </form>
           <p className="text-xl mb-4">Search Results:</p>
           {loading ? (
-            <p>Loading...</p>
+            <p>Loading....</p>
           ) : (
             <>
               <div className="max-h-[18rem] bg-[#2e2e2e] p-4 rounded overflow-y-scroll">
