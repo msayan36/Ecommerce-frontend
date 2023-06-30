@@ -36,7 +36,7 @@ const Search = () => {
     handleSubmit();
   }, [searchQuery]);
 
-  console.log(searchRes);
+  // console.log(searchRes);
 
   return (
     <div className="flex flex-row bg-black h-full">

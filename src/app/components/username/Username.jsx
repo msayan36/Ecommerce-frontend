@@ -34,6 +34,8 @@ const Username = () => {
   const [loading, setLoading] = useState(false);
   const [userInfo, setUserInfo] = useState({});
   const [productInfo, setProductInfo] = useState({});
+  const [isFollowing, setIsFollowing] = useState(false);
+  const [isFollowRunning, setIsFollowRunning] = useState(false);
 
   // const products_count = 0;
   // const followers_count = 0;
@@ -75,9 +77,35 @@ const Username = () => {
     }
   };
 
+  const followUserFunc = async () => {
+    setLoading(true);
+    try {
+      const res = await instance.get(
+        `${
+          process.env.NEXT_PUBLIC_SERVER_URL
+        }/follow?username=${window.location.pathname.slice(1)}`
+      );
+      // console.log(res.data);
+      setIsFollowRunning((prevVal) => !prevVal);
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
     apiCall();
-  }, []);
+  }, [isFollowRunning]);
+  // }, []);
+
+  useEffect(() => {
+    userInfo.followers &&
+      userInfo.followers.map((singleUser) => {
+        singleUser === JSON.parse(localStorage.userInfo)._id &&
+          setIsFollowing(true);
+      });
+  }, [userInfo]);
 
   const products_count = userInfo.products_count
     ? userInfo.products_count.length
@@ -112,10 +140,16 @@ const Username = () => {
                   {/* Username */}
                 </div>
                 <div className="pr-5">
-                  <WhiteBtn data="Follow"></WhiteBtn>
+                  {isFollowing ? (
+                    <BlackBtn data="Unfollow"></BlackBtn>
+                  ) : (
+                    <span onClick={followUserFunc}>
+                      <WhiteBtn data="Follow"></WhiteBtn>
+                    </span>
+                  )}
                 </div>
                 <div className="pr-5">
-                  {/* <BlackBtn data="Following"></BlackBtn> */}
+                  {isFollowing && <WhiteBtn data="Following"></WhiteBtn>}
                 </div>
                 {/* <div className="py-1">
                   <IoIosSettings
