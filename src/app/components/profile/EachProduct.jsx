@@ -103,7 +103,7 @@ const EachProduct = ({ productDet }) => {
                 </div>
               </div>
               <button className="my-1 bg-slate-200 px-3 hover:text-white hover:bg-cyan-200/75 transition-all py-3 text-black w-40 text-center rounded-lg">
-                Buy Now
+                Add To Cart
               </button>
             </div>
             <div className="border-t-[1px] border-[#ffffff32] py-2">
@@ -116,11 +116,11 @@ const EachProduct = ({ productDet }) => {
                   ></AiOutlineHeart>
                 </Link>
 
-                <AiOutlineShoppingCart
+                {/* <AiOutlineShoppingCart
                   className="inline"
                   color="white"
                   size={30}
-                ></AiOutlineShoppingCart>
+                ></AiOutlineShoppingCart> */}
                 <div className="ml-auto">
                   {productDet.rating.length > 0 && (
                     <AiFillStar

@@ -83,11 +83,11 @@ const FeedItems = ({ profiles }) => {
                 ></AiOutlineHeart>
               </Link>
 
-              <AiOutlineShoppingCart
+              {/* <AiOutlineShoppingCart
                 className="inline"
                 color="white"
                 size={30}
-              ></AiOutlineShoppingCart>
+              ></AiOutlineShoppingCart> */}
               <div className="ml-auto">
                 {item.rating.length > 0 && (
                   <AiFillStar
@@ -122,7 +122,7 @@ const FeedItems = ({ profiles }) => {
                 {item.productDesc}
               </div>
               <button className="my-4 bg-slate-200 px-2 hover:text-white hover:bg-cyan-200/75 transition-all py-2 text-black w-32 text-center rounded-lg">
-                Buy Now
+                Add To Cart
               </button>
             </div>
 
