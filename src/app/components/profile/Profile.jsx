@@ -165,7 +165,11 @@ const Profile = () => {
             {productInfo.length > 0
               ? productInfo.map((item) => (
                   // <>
-                  <EachProduct key={item._id} productDet={item} />
+                  <EachProduct
+                    key={item._id}
+                    productDet={item}
+                    isMyProfile={true}
+                  />
                   // </>
                 ))
               : "No Products Added Yet"}

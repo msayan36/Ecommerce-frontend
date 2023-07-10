@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import profilesImg from "./images/profiles.png";
 import feedImg from "./images/feedImg.jpg";
+import { ToastContainer, toast } from "react-toastify";
 import { BsDot } from "react-icons/bs";
 import {
   AiOutlineHeart,
@@ -32,6 +33,38 @@ const FeedItems = ({ profiles }) => {
     } catch (error) {
       console.log(error);
       setLoading(false);
+    }
+  };
+
+  const handleAddCart = async (pdtId) => {
+    setLoading(true);
+    try {
+      const res = await instance.post(
+        `${process.env.NEXT_PUBLIC_SERVER_URL}/cart?product=${pdtId}`
+      );
+      setLoading(false);
+      toast.success("Added To Wishlist");
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+      toast.success("Unable to Add To Wishlist");
+    }
+  };
+
+  const handleAddWishlist = async (pdtId) => {
+    setLoading(true);
+    try {
+      const res = await instance.post(
+        `${process.env.NEXT_PUBLIC_SERVER_URL}/wishlist?product=${pdtId}`
+      );
+      setLoading(false);
+      toast.success("Added To Cart");
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+      toast.success("Unable to Add To Cart");
     }
   };
 
@@ -75,13 +108,16 @@ const FeedItems = ({ profiles }) => {
               alt="Feed mage"
             ></Image>
             <div className="flex pb-3">
-              <Link href="" className="likebtn">
+              <button
+                className="likebtn"
+                onClick={() => handleAddWishlist(item._id)}
+              >
                 <AiOutlineHeart
                   className=" inline"
                   color="white"
                   size={30}
                 ></AiOutlineHeart>
-              </Link>
+              </button>
 
               {/* <AiOutlineShoppingCart
                 className="inline"
@@ -121,7 +157,10 @@ const FeedItems = ({ profiles }) => {
               <div className="text-sm font-extralight text-justify mb-2">
                 {item.productDesc}
               </div>
-              <button className="my-4 bg-slate-200 px-2 hover:text-white hover:bg-cyan-200/75 transition-all py-2 text-black w-32 text-center rounded-lg">
+              <button
+                className="my-4 bg-slate-200 px-2 hover:text-white hover:bg-cyan-200/75 transition-all py-2 text-black w-32 text-center rounded-lg"
+                onClick={() => handleAddCart(item._id)}
+              >
                 Add To Cart
               </button>
             </div>
@@ -145,6 +184,7 @@ const FeedItems = ({ profiles }) => {
       <p className="text-center mb-4 text-[#ffffff63]">
         You Have Reached the End
       </p>
+      <ToastContainer />
     </>
   );
 };
