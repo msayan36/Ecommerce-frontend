@@ -25,6 +25,7 @@ const Wishlist = () => {
 
   const wishlistItemsCall = async () => {
     setLoading(true);
+
     try {
       const res = await instance.get(
         `${process.env.NEXT_PUBLIC_SERVER_URL}/wishlist`
