@@ -43,12 +43,12 @@ const FeedItems = ({ profiles }) => {
         `${process.env.NEXT_PUBLIC_SERVER_URL}/cart?product=${pdtId}`
       );
       setLoading(false);
-      toast.success("Added To Wishlist");
+      toast.success("Added To Cart");
       console.log(res);
     } catch (error) {
       console.log(error);
       setLoading(false);
-      toast.success("Unable to Add To Wishlist");
+      toast.success("Unable to Add To Cart");
     }
   };
 
@@ -59,12 +59,12 @@ const FeedItems = ({ profiles }) => {
         `${process.env.NEXT_PUBLIC_SERVER_URL}/wishlist?product=${pdtId}`
       );
       setLoading(false);
-      toast.success("Added To Cart");
+      toast.success("Added To Wishlist");
       console.log(res);
     } catch (error) {
       console.log(error);
       setLoading(false);
-      toast.success("Unable to Add To Cart");
+      toast.success("Unable to Add To Wishlist");
     }
   };
 

@@ -29,12 +29,12 @@ const Items = ({ data }) => {
         `${process.env.NEXT_PUBLIC_SERVER_URL}/cart?product=${pdtId}`
       );
       setLoading(false);
-      toast.success("Added To Wishlist");
+      toast.success("Added To Cart");
       console.log(res);
     } catch (error) {
       console.log(error);
       setLoading(false);
-      toast.error("Unable to Add To Wishlist");
+      toast.error("Unable to Add To Cart");
     }
   };
 
