@@ -46,12 +46,13 @@ const Wishlist = () => {
   if (loading) return <p>Loading...</p>;
 
   return (
-    <>
+    <div className="overflow-y-hidden">
+      <div></div>
       <div className="flex flex-row bg-black h-full">
         <div className="basis-2/12 ">
           <Navbar />
         </div>
-        <div className="basis-10/12 pl-10 pr-20 h-fit ">
+        <div className="basis-10/12 pl-10 pr-20 h-screen overflow-x-hidden scrollbar-hide">
           <div className="text-3xl text-white py-12">My Wishlist</div>
           {wishlistItems.length === 0 ? (
             <p className="text-center mb-4 text-[#ffffff63]">
@@ -68,7 +69,7 @@ const Wishlist = () => {
           )}
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

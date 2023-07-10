@@ -22,6 +22,7 @@ const Cart = () => {
 
   const [loading, setLoading] = useState(false);
   const [cartItems, setCartItems] = useState([]);
+  const [totalSum, setTotalSum] = useState(0);
 
   const cartItemsCall = async () => {
     setLoading(true);
@@ -29,8 +30,29 @@ const Cart = () => {
       const res = await instance.get(
         `${process.env.NEXT_PUBLIC_SERVER_URL}/cart`
       );
+      let sum = res.data.reduce((accum, currElem) => accum + currElem.price, 0);
+
+      setTotalSum(sum);
 
       setCartItems(res.data);
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+    }
+  };
+
+  const handleCheckout = async () => {
+    setLoading(true);
+    try {
+      const res = await instance.post(
+        `${process.env.NEXT_PUBLIC_SERVER_URL}/create-checkout-session`,
+        { cartItems }
+      );
+      console.log(res.data.url);
+      if (typeof window !== "undefined") {
+        router.replace(res.data.url);
+      }
       setLoading(false);
     } catch (error) {
       console.log(error);
@@ -64,12 +86,21 @@ const Cart = () => {
                   <Items key={item._id} data={item} />
                 </div>
               ))}
-              <div className="flex justify-end py-5">
-                <WhiteBtn
+              <div className="flex items-center justify-between py-5">
+                {/* <WhiteBtn
                   className="inline ml-auto"
                   data="Checkout"
                   link="/checkout"
-                ></WhiteBtn>
+                ></WhiteBtn> */}
+                <div className="text-xl">
+                  <span>Total:</span> <span>${totalSum}</span>
+                </div>
+                <button onClick={handleCheckout}>
+                  <WhiteBtn
+                    className="inline ml-auto"
+                    data="Checkout"
+                  ></WhiteBtn>
+                </button>
               </div>{" "}
             </>
           )}
