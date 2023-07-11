@@ -43,8 +43,8 @@ const Items = ({ data }) => {
           </div>
         </div>
 
-        <div className="w-1/6 flex-col flex justify-center ">
-          <div className="text-right  text-2xl font-extralight">
+        <div className="w-1/6 flex-col flex justify-center items-center">
+          <div className="text-right text-2xl font-extralight">
             ${data.price}
           </div>
           {/* <div className="text-right pt-5">
@@ -64,6 +64,14 @@ const Items = ({ data }) => {
               ></AiOutlinePlus>
             </div>
           </div> */}
+          <button className="mt-6 py-[1px] px-[8px] rounded flex items-center justify-center bg-white">
+            <AiOutlineMinus
+              onClick={decrementCount}
+              className="inline"
+              color="black"
+              size={20}
+            ></AiOutlineMinus>
+          </button>
         </div>
       </div>
     </>
