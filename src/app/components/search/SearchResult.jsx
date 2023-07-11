@@ -13,7 +13,7 @@ const SearchResult = ({ searchResult }) => {
           <Link href={`/${searchResult.username}`}>
             <Image
               className="inline "
-              src={profilesImg}
+              src={searchResult.profile_pic}
               height={40}
               width={40}
               alt="User Image"

@@ -48,7 +48,7 @@ const FeedSuggested = ({ profile }) => {
                   <Link href={`/${item.username}`}>
                     <Image
                       className="inline "
-                      src={profilesImg}
+                      src={item.profile_pic}
                       height={40}
                       width={40}
                       alt="User Image"

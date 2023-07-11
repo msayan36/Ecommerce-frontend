@@ -34,8 +34,15 @@ const EditForm = () => {
     e.preventDefault();
 
     try {
-      const { name, username, email, password, confirmPassword, profileDesc } =
-        userInfo;
+      const {
+        name,
+        username,
+        email,
+        password,
+        confirmPassword,
+        profileDesc,
+        profile_pic,
+      } = userInfo;
 
       if (password) {
         if (password !== confirmPassword) {
@@ -50,6 +57,7 @@ const EditForm = () => {
           username,
           email,
           profileDesc,
+          profile_pic,
         }
       );
       // localStorage.setItem("userInfo", JSON.stringify(res.data));
@@ -72,22 +80,32 @@ const EditForm = () => {
     apiCall();
   }, []);
 
+  console.log(userInfo);
+
   if (loading) return <h1>Loading ...</h1>;
 
   return (
     <>
-      <div className="flex items-center">
-        <Image
-          src={ProfileImg}
-          alt="Profile Picture"
-          width={60}
-          height={60}
-        ></Image>
-        <p className="ml-4 text-blue-400 cursor-pointer hover:text-blue-700">
-          Change Profile Image
-        </p>
-      </div>
       <form className="mt-8 flex flex-col" onSubmit={handleSubmit}>
+        <div className="flex items-center mb-4">
+          <Image
+            src={userInfo.profile_pic}
+            alt="Profile Picture"
+            width={60}
+            height={60}
+          ></Image>
+          <input
+            type="file"
+            className="ml-4 text-blue-400 cursor-pointer hover:text-blue-700"
+            // value={userInfo.profile_pic}
+            onChange={(e) =>
+              setUserInfo((prevVal) => ({
+                ...prevVal,
+                profile_pic: e.target.files[0],
+              }))
+            }
+          />
+        </div>
         <input
           className="py-[0.2rem] px-2 outline-none bg-transparent border-[0.1rem] text-white rounded-md border-white w-[18rem] mb-4"
           type="text"

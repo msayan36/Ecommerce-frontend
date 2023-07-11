@@ -1,3 +1,6 @@
+"use client";
+
+import { useState, useEffect } from "react";
 import {
   AiFillHome,
   AiOutlineSearch,
@@ -9,7 +12,12 @@ import Link from "next/link";
 import Image from "next/image";
 import "./navbar.css";
 import ProfileImg from "../profile/images/profile.png";
+import axios from "axios";
+
 const Navbar = () => {
+  const [userInfo, setUserInfo] = useState({});
+  const [loading, setLoading] = useState(false);
+
   let list = [
     { key: "Home", icon: <AiFillHome />, link: "/" },
     { key: "Search", icon: <AiOutlineSearch />, link: "/search" },
@@ -21,8 +29,10 @@ const Navbar = () => {
       icon: (
         <Image
           className="profImg"
-          src={ProfileImg}
+          src={userInfo.profile_pic}
           alt="Profile Picture"
+          width={40}
+          height={40}
         ></Image>
       ),
       link: "/profile",
@@ -31,6 +41,31 @@ const Navbar = () => {
   const Icon = ({ icon }) => {
     return <span className="navIcon">{icon}</span>;
   };
+
+  const instance = axios.create({
+    withCredentials: true,
+  });
+
+  const apiCall = async () => {
+    setLoading(true);
+    const res = await instance.get(
+      `${process.env.NEXT_PUBLIC_SERVER_URL}/users/me`
+    );
+
+    const productRes = await instance.get(
+      `${process.env.NEXT_PUBLIC_SERVER_URL}/products/${res.data.username}`
+    );
+
+    // console.log(res.data);
+    // console.log(res.data.username);
+    // console.log(res.data.name);
+    setUserInfo(res.data);
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    apiCall();
+  }, []);
 
   return (
     <>

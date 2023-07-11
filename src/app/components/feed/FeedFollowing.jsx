@@ -69,7 +69,7 @@ const FeedFollowing = ({ profiles }) => {
                 >
                   <Image
                     className="mx-auto"
-                    src={profilesImg}
+                    src={item.profile_pic}
                     width={50}
                     height={50}
                     alt={item.username + " image"}
