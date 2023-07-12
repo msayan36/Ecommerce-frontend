@@ -1,4 +1,5 @@
-import React from "react";
+"use client";
+
 import { useState } from "react";
 import Image from "next/image";
 import prodImg from "./images/feedImg.jpg";
