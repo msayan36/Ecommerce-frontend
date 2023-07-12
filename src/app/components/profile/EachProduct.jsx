@@ -14,6 +14,7 @@ import {
 import axios from "axios";
 
 import Modal from "react-modal";
+
 const EachProduct = ({ productDet, isMyProfile = false }) => {
   const [hover, setHover] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -78,7 +79,17 @@ const EachProduct = ({ productDet, isMyProfile = false }) => {
         className={`cursor-pointer w-1/3 pr-1 pb-1`}
       >
         <div onClick={() => setIsOpen(true)} className=" relative">
-          <Image className="product" src={ProdImg} alt="Product Image"></Image>
+          <Image
+            className="product"
+            src={
+              productDet.productImg === "Default Link"
+                ? ProdImg
+                : productDet.productImg
+            }
+            width={500}
+            height={500}
+            alt="Product Image"
+          ></Image>
           <div
             className={`prod_not_hover ${
               hover && "prod_hover"
@@ -140,7 +151,7 @@ const EachProduct = ({ productDet, isMyProfile = false }) => {
                       {productDet.productName}
                     </div>
                     <div className="text-2xl font-light">
-                      ₹{productDet.price}
+                      ${productDet.price}
                     </div>
                   </div>
                   <div className="text-sm pt-2 text-slate-300 font-extralight">

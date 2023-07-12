@@ -43,7 +43,13 @@ const Items = ({ data }) => {
   return (
     <>
       <div className="flex flex-row">
-        <Image className="w-1/6" src={prodImg} alt="Product Image"></Image>
+        <Image
+          className="w-1/6"
+          src={data.productImg === "Default Link" ? prodImg : data.productImg}
+          width={200}
+          height={200}
+          alt="Product Image"
+        ></Image>
         <div className="w-4/6 flex flex-col justify-center pl-5 ">
           <div className="text-2xl font-semibold ">{data.productName}</div>
           <div className="text-sm text-justify font-extralight  pt-5 text-slate-200">

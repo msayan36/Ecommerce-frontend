@@ -17,6 +17,9 @@ const EditForm = () => {
   const [userInfo, setUserInfo] = useState({});
   const [confirmPassword, setConfirmPassword] = useState("");
 
+  const [formProfileImage, setFormProfileImage] = useState("");
+  const [previewSource, setPreviewSource] = useState("");
+
   const apiCall = async () => {
     setLoading(true);
     try {
@@ -28,6 +31,44 @@ const EditForm = () => {
       console.log(error);
     }
     setLoading(false);
+  };
+
+  const handleImageInputChange = (e) => {
+    const file = e.target.files[0];
+    // setFormProfileImage(file);
+    previewFile(file);
+  };
+
+  const previewFile = (file) => {
+    const reader = new FileReader();
+
+    reader.readAsDataURL(file);
+    reader.onloadend = () => {
+      setPreviewSource(reader.result);
+    };
+  };
+
+  const uploadImage = async (base64EncodedImage) => {
+    // console.log(base64EncodedImage);
+    setLoading(true);
+    try {
+      const res = await instance.post(
+        `${process.env.NEXT_PUBLIC_SERVER_URL}/uploadImage`,
+        {
+          data: base64EncodedImage,
+        }
+      );
+
+      setUserInfo((prevVal) => ({ ...prevVal, profile_pic: res.data.url }));
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+    }
+  };
+
+  const upload = async () => {
+    if (previewSource) await uploadImage(previewSource);
   };
 
   const handleSubmit = async (e) => {
@@ -43,6 +84,8 @@ const EditForm = () => {
         profileDesc,
         profile_pic,
       } = userInfo;
+
+      // console.log(profileDesc, profile_pic);
 
       if (password) {
         if (password !== confirmPassword) {
@@ -60,6 +103,8 @@ const EditForm = () => {
           profile_pic,
         }
       );
+
+      // console.log(res);
       // localStorage.setItem("userInfo", JSON.stringify(res.data));
       // setName("");
       // setEmail("");
@@ -80,8 +125,6 @@ const EditForm = () => {
     apiCall();
   }, []);
 
-  console.log(userInfo);
-
   if (loading) return <h1>Loading ...</h1>;
 
   return (
@@ -89,7 +132,7 @@ const EditForm = () => {
       <form className="mt-8 flex flex-col" onSubmit={handleSubmit}>
         <div className="flex items-center mb-4">
           <Image
-            src={userInfo.profile_pic}
+            src={previewSource ? previewSource : userInfo.profile_pic}
             alt="Profile Picture"
             width={60}
             height={60}
@@ -97,14 +140,17 @@ const EditForm = () => {
           <input
             type="file"
             className="ml-4 text-blue-400 cursor-pointer hover:text-blue-700"
-            // value={userInfo.profile_pic}
-            onChange={(e) =>
-              setUserInfo((prevVal) => ({
-                ...prevVal,
-                profile_pic: e.target.files[0],
-              }))
-            }
+            value={formProfileImage}
+            onChange={handleImageInputChange}
           />
+          {previewSource && (
+            <button
+              onClick={upload}
+              className="btn bg-blue-600 px-2 py-1 rounded"
+            >
+              Upload
+            </button>
+          )}
         </div>
         <input
           className="py-[0.2rem] px-2 outline-none bg-transparent border-[0.1rem] text-white rounded-md border-white w-[18rem] mb-4"

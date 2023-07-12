@@ -132,10 +132,12 @@ const FeedItems = ({ profiles }) => {
               </div>
               <Image
                 className="my-3 w-full"
-                src={feedImg}
+                src={
+                  item.productImg === "Default Link" ? feedImg : item.productImg
+                }
                 width={200}
                 height={200}
-                alt="Feed mage"
+                alt="Feed Image"
               ></Image>
               <div className="flex pb-3">
                 {wishlistItems.map((w, idx, arr) => {
@@ -197,7 +199,7 @@ const FeedItems = ({ profiles }) => {
                   {item.productName}
                 </div>
                 <div className="inline text-3xl font-normal ml-auto">
-                  ₹{item.price}
+                  ${item.price}
                 </div>
               </div>
 
