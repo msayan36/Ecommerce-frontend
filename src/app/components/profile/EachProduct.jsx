@@ -127,8 +127,14 @@ const EachProduct = ({ productDet, isMyProfile = false }) => {
         >
           <div className="bg-slate-950 px-5 py-5 w-fit grid grid-flow-col grid-cols-2 relative">
             <Image
-              className="product w-full cols "
-              src={ProdImg}
+              className="product w-full cols"
+              src={
+                productDet.productImg === "Default Link"
+                  ? ProdImg
+                  : productDet.productImg
+              }
+              width={500}
+              height={500}
               alt="Product Image"
             ></Image>
             <div className="text-white pl-5 w-full flex flex-col justify-between">
