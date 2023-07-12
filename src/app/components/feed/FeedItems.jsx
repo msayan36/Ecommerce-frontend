@@ -70,6 +70,25 @@ const FeedItems = ({ profiles }) => {
     }
   };
 
+  const handleRemoveWishlist = async (pdtId) => {
+    setLoading(true);
+    try {
+      const res = await instance.post(
+        `${process.env.NEXT_PUBLIC_SERVER_URL}/wishlist/remove-singleWishlistItem`,
+        {
+          pdtId,
+        }
+      );
+      setLoading(false);
+      toast.success("Removed From Wishlist");
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+      toast.success("Unable to Add To Wishlist");
+    }
+  };
+
   const wishlistItemsCall = async () => {
     setLoading(true);
 
@@ -146,7 +165,7 @@ const FeedItems = ({ profiles }) => {
                     return (
                       <button
                         className="likebtn"
-                        // onClick={() => handleAddWishlist(item._id)}
+                        onClick={() => handleRemoveWishlist(item._id)}
                       >
                         <AiFillHeart
                           className="inline"
