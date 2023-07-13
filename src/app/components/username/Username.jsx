@@ -127,7 +127,7 @@ const Username = () => {
             <div className="basis-1/3 flex justify-end items-center mr-20 h-fit">
               <Image
                 className=" "
-                src={ProfileImg}
+                src={userInfo.profile_pic}
                 alt="Profile Picture"
                 width={140}
                 height={140}
