@@ -192,7 +192,11 @@ const Username = () => {
             {productInfo.length > 0
               ? productInfo.map((item) => (
                   // <>
-                  <EachProduct key={item._id} productDet={item} />
+                  <EachProduct
+                    key={item._id}
+                    productDet={item}
+                    userInfo={userInfo}
+                  />
                   // </>
                 ))
               : "No Products Added Yet"}

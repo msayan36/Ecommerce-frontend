@@ -169,6 +169,7 @@ const Profile = () => {
                     key={item._id}
                     productDet={item}
                     isMyProfile={true}
+                    userInfo={userInfo}
                   />
                   // </>
                 ))

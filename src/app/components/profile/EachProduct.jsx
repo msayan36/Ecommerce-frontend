@@ -15,7 +15,7 @@ import axios from "axios";
 
 import Modal from "react-modal";
 
-const EachProduct = ({ productDet, isMyProfile = false }) => {
+const EachProduct = ({ productDet, isMyProfile = false, userInfo }) => {
   const [hover, setHover] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -139,10 +139,10 @@ const EachProduct = ({ productDet, isMyProfile = false }) => {
             ></Image>
             <div className="text-white pl-5 w-full flex flex-col justify-between">
               <div>
-                <div className="border-b-[1px] border-[#ffffff32] pt-2 pb-4 ">
+                <div className="border-b-[1px] border-[#ffffff32] pt-2 pb-4 flex">
                   <Image
-                    className=" inline"
-                    src={ProfileImg}
+                    className=" "
+                    src={userInfo.profile_pic}
                     alt="Profile Picture"
                     width={30}
                     height={30}
