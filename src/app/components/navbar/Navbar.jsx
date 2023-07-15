@@ -28,7 +28,7 @@ const Navbar = () => {
       key: "Profile",
       icon: (
         <Image
-          className="profImg"
+          className="profImg rounded-full w-10 h-10"
           src={userInfo.profile_pic}
           alt="Profile Picture"
           width={40}
