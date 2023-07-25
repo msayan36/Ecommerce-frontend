@@ -126,7 +126,7 @@ const Username = () => {
           <div className="flex flex-row border-b-[1px] border-[#ffffff32] mr-2">
             <div className="basis-1/3 flex justify-end items-center mr-20 h-fit">
               <Image
-                className=" "
+                className="rounded-full w-40 h-40 "
                 src={userInfo.profile_pic}
                 alt="Profile Picture"
                 width={140}

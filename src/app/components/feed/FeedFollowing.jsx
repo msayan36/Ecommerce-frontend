@@ -68,7 +68,7 @@ const FeedFollowing = ({ profiles }) => {
                   className="text-center  px-4  hover:scale-95 ease-in-out duration-200  "
                 >
                   <Image
-                    className="mx-auto rounded-full w-16 h-16"
+                    className="mx-auto rounded-full w-14 h-14"
                     src={item.profile_pic}
                     width={50}
                     height={50}

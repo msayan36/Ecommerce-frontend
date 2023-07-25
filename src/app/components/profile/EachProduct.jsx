@@ -76,7 +76,7 @@ const EachProduct = ({ productDet, isMyProfile = false, userInfo }) => {
       <div
         onMouseEnter={mouseOver}
         onMouseLeave={mouseOut}
-        className={`cursor-pointer w-96 h-96 pr-1 pb-1`}
+        className={`cursor-pointer w-1/3 pr-1 pb-1`}
       >
         <div onClick={() => setIsOpen(true)} className=" relative">
           <Image
